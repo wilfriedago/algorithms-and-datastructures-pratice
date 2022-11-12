@@ -1,72 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-/***********************************************
- *      Fonctions & Procédures utilitaires     *
- ***********************************************/
-
-/**
- * @brief Procédure permettant d'afficher le menu du jeu
- */
-void displayMenu()
-{
-    // rectangle(POS_X - 1, POS_Y - 1, 25, 2);
-    // rectangle(POS_X - 1, POS_Y + 2, 25, 5);
-    // rectangle(POS_X - 1, POS_Y + 8, 25, 2);
-
-    // gotoxy(POS_X + 10, POS_Y);
-    printf("MENU");
-
-    // gotoxy(POS_X + 1, POS_Y + 3);
-    printf("1. Créer une liste chaînée d'entier");
-
-    // gotoxy(POS_X + 1, POS_Y + 4);
-    printf("2. Ajouter un element en tete de liste");
-
-    // gotoxy(POS_X + 1, POS_Y + 5);
-    printf("3. Ajouter un élément en queue de liste");
-
-    // gotoxy(POS_X + 1, POS_Y + 6);
-    printf("4. Tier la liste");
-
-    // gotoxy(POS_X + 1, POS_Y + 7);
-    printf("5. Supprimer un élément donné de la liste");
-
-    // gotoxy(POS_X + 1, POS_Y + 8);
-    printf("6. Supprimer les doublons de la liste");
-
-    // gotoxy(POS_X + 1, POS_Y + 9);
-    printf("7. Supprimer le dernier élément de la liste");
-
-    // gotoxy(POS_X + 1, POS_Y + 10);
-    printf("8. Fusionner deux listes");
-
-    // gotoxy(POS_X + 1, POS_Y + 11);
-    printf("9. Inverser la liste");
-
-    // gotoxy(POS_X + 1, POS_Y + 12);
-    printf("10. Vérifier si une liste est un palindrome");
-
-    // gotoxy(POS_X + 1, POS_Y + 13);
-    printf("11. Quitter");
-}
-
-/**
- * @brief Fonction permettant de lire une caractère saisie à la console
- * @param message Message à afficher dans la console
- * @return char*
- */
-int readNumber(char *message)
-{
-    int choice;
-    printf("%s", message);
-    scanf("%d", &choice);
-    return choice;
-}
-
-/***********************************************
- *  x  Fonctions & Procédures utilitaires   x  *
- ***********************************************/
+#include <stdbool.h>
+#include <string.h>
+#include <wchar.h>
 
 typedef struct Cellule Cellule; // Déclaration de la structure Cellule
 
@@ -80,60 +16,169 @@ struct Cellule
 typedef Cellule *Liste; // Définition de la structure de la liste
 
 /**
+ * @brief Procédure permettant de nettoyer le contenu de la console
+ */
+void clearConsole()
+{
+#ifdef _WIN32
+    system("cls");
+#endif
+
+#ifdef __unix__
+    system("clear");
+#endif
+}
+
+/**
+ * @brief Procédure permettant de faire une pause la console
+ */
+void pauseConsole()
+{
+#ifdef _WIN32
+    system("pause");
+#endif
+
+#ifdef __unix__
+    system("sleep 2");
+#endif
+}
+
+/**
+ * @brief Procédure permettant d'afficher le menu du jeu
+ */
+void displayMenu()
+{
+    clearConsole();
+    printf("**********************************\n*        MENU DU PROGRAMME       *\n**********************************\n\n 0. Afficher la liste\n 1. Créer une liste chaînée d'entier\n 2. Ajouter un élément en tête de liste\n 3. Ajouter un élément en queue de liste\n 4. Tier la liste\n 5. Supprimer un élément de la liste\n 6. Supprimer les doublons de la liste\n 7. Supprimer le dernier élément de la liste\n 8. Fusionner deux listes\n 9. Inverser la liste\n10. Vérifier si une liste est un palindrome\n11. Quitter le programme\n");
+}
+
+/**
+ * @brief Fonction permettant de lire une caractère saisie à la console
+ * @param message Message à afficher dans la console
+ * @return int
+ */
+int readNumber(char *message)
+{
+    int choice;
+    printf("%s", message);
+    scanf("%d", &choice);
+    return choice;
+}
+
+/**
+ * Fonction permettant de vérifier si un nombre est compris dans un intervalle
+ * @param number Valeur à tester
+ * @param min Valeur minimum
+ * @param max Valeur maximale
+ */
+bool isBetween(int number, int min, int max)
+{
+    return (number >= min && number <= max) ? true : false;
+}
+
+/**
  * @brief Fonction permettant de créer une liste chaînée d'une taille donnée
  * @param list Liste passé en paramètre par variable
  * @param size Taille de la liste
  */
 void createList(Liste *list, int size)
 {
-    Cellule *P = malloc(sizeof(Cellule));
+    Liste P = NULL;
+    Liste Q = NULL;
+    int i = 0;
 
-    if (P == NULL)
-        exit(EXIT_FAILURE);
-
-    P->val = (int)readNumber("Saisissez une valeur : ");
-    P->suiv = NULL;
-    P->prec = NULL;
-
-    *list = P;
-
-    for (int i = 2; i <= size; i++)
+    for (i = 0; i < size; i++)
     {
-        Cellule *Q = malloc(sizeof(Cellule));
+        P = (Liste)malloc(sizeof(Cellule));
+        P->val = readNumber("\nSaisissez un nombre entier : ");
+        P->suiv = NULL;
+        P->prec = NULL;
 
-        if (Q == NULL)
-            exit(EXIT_FAILURE);
-
-        Q->val = (int)readNumber("Saisissez une valeur : ");
-        Q->suiv = NULL;
-        Q->prec = P;
-
-        P->suiv = Q;
-        P = Q;
+        if (*list == NULL)
+        {
+            *list = P;
+            Q = P;
+        }
+        else
+        {
+            Q->suiv = P;
+            P->prec = Q;
+            Q = P;
+        }
     }
 }
 
 /**
  * @brief Procédure permettant d'afficher une liste
  */
-void printList(Liste list)
+void displayList(Liste list)
 {
-    Liste P;
-    P = list;
+    Liste P = list;
+
     while (P != NULL)
     {
-        printf("%d\t", P->val);
+        printf("%d - ", P->val);
         P = P->suiv;
     }
-    printf("\n");
 }
 
-int main(void)
+int main()
 {
-    Liste myList;
+    int choice = 0;
+    int size = 0;
+    Liste list = NULL;
 
-    createList(&myList, 5);
-    printList(myList);
+    do
+    {
+        displayMenu();
+        choice = readNumber("\nVotre choix : ");
 
-    return 0;
+        if (isBetween(choice, 0, 11))
+        {
+            switch (choice)
+            {
+            case 0:
+                if (list != NULL)
+                    displayList(list);
+                else
+                    printf("Rien à afficher ! Liste non initialisé !\n");
+
+                break;
+            case 1:
+                size = readNumber("\nTaille de la liste : ");
+                createList(&list, size);
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+            case 10:
+                break;
+            case 11:
+                printf("Le programme va s'arrêter !\n");
+                break;
+            }
+
+            pauseConsole();
+        }
+        else
+        {
+            printf("Choix invalide ! Veuillez saisir un nombre entre 1 et 11.\n\n");
+        }
+
+    } while (choice != 11);
+
+    return EXIT_SUCCESS;
 }
