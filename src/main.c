@@ -79,8 +79,61 @@ struct Cellule
 
 typedef Cellule *Liste; // Définition de la structure de la liste
 
+/**
+ * @brief Fonction permettant de créer une liste chaînée d'une taille donnée
+ * @param list Liste passé en paramètre par variable
+ * @param size Taille de la liste
+ */
+void createList(Liste *list, int size)
+{
+    Cellule *P = malloc(sizeof(Cellule));
+
+    if (P == NULL)
+        exit(EXIT_FAILURE);
+
+    P->val = (int)readNumber("Saisissez une valeur : ");
+    P->suiv = NULL;
+    P->prec = NULL;
+
+    *list = P;
+
+    for (int i = 2; i <= size; i++)
+    {
+        Cellule *Q = malloc(sizeof(Cellule));
+
+        if (Q == NULL)
+            exit(EXIT_FAILURE);
+
+        Q->val = (int)readNumber("Saisissez une valeur : ");
+        Q->suiv = NULL;
+        Q->prec = P;
+
+        P->suiv = Q;
+        P = Q;
+    }
+}
+
+/**
+ * @brief Procédure permettant d'afficher une liste
+ */
+void printList(Liste list)
+{
+    Liste P;
+    P = list;
+    while (P != NULL)
+    {
+        printf("%d\t", P->val);
+        P = P->suiv;
+    }
+    printf("\n");
+}
+
 int main(void)
 {
-    printf("Hello world !\n");
+    Liste myList;
+
+    createList(&myList, 5);
+    printList(myList);
+
     return 0;
 }
