@@ -130,6 +130,7 @@ int main()
 
     do
     {
+        // Comment from Codesspaces
         displayMenu();
         choice = readNumber("\nVotre choix : ");
 
