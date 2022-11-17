@@ -314,7 +314,7 @@ int main()
                     printf((deleteCell(&list, val)) ? "\nSuppression effectuée avec succès !" : "\nÉchec de la suppression ! %d ne se trouve pas dans la liste", val);
                 }
                 else
-                    printf("Impossible de trier la liste ! Liste non initialisé !\n");
+                    printf("Impossible d'effectué cette opération. Liste non initialisé !\n");
                 break;
             case 6:
                 break;
