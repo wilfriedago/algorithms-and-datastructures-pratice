@@ -7,7 +7,7 @@
 - [x] : Implement addTail function to add a node at the tail of the list.
 - [x] : Implement sortList function to sort the list.
 - [x] : Implement printList function to print the list.
-- [ ] : Implement deleteList function to delete the list.
+- [x] : Implement deleteList function to delete the list.
 - [ ] : Implement deleteNode function to delete a node from the list.
 - [ ] : Implement deleteDuplicate function to delete duplicate nodes from the list.
 - [ ] : Implement searchList function to search a node in the list.

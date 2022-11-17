@@ -218,10 +218,45 @@ void sortList(Liste *list)
     }
 }
 
+/**
+ * @brief Procédure permettant de supprimer un élément donné de la liste
+ * @param list Liste passé en paramètre par variable.
+ * @param value Valeur de la cellule qu'on veux supprimer.
+ */
+bool deleteCell(Liste *list, int value)
+{
+    Cellule *P = *list;
+
+    while (P != NULL)
+    {
+        if (P->val == value)
+        {
+            if (P->prec == NULL) // Suppression à la tête de la liste
+            {
+                *list = P->suiv;
+                P->suiv->prec = NULL;
+            }
+            else if (P->suiv == NULL) // Suppression à la queue de la liste
+            {
+                P->prec->suiv = NULL;
+            }
+            else
+            {
+                P->prec->suiv = P->suiv;
+                P->suiv->prec = P->prec;
+            }
+            free(P);
+            return true; // On retourne vrai si la suppression c'est réalisé
+        }
+        P = P->suiv;
+    }
+    return false; // On retourne faux si il n'y a pas eu de suppression
+}
+
 int main()
 {
     int choice = 0;
-    int size = 0;
+    int val, size = 0;
     Liste list = NULL;
 
     do
@@ -245,11 +280,11 @@ int main()
                 if (listExist(list))
                 {
                     printf("Une liste existe déjà !\nCréer une nouvelle liste revient à écraser les valeurs de cette liste existante");
-                    int c = readNumber("\n\nVoulez vous vraiment poursuivre cette opération ? Taper 1 pour Oui, ou 0 pour Non : ");
+                    val = readNumber("\n\nVoulez vous vraiment poursuivre cette opération ? Taper 1 pour Oui, ou 0 pour Non : ");
 
-                    if (c == 0)
+                    if (val == 0)
                         break; // On passe l'étape si l'utilisateur choisir de ne pas recréer une nouvelle liste.
-                    else if (c == 1)
+                    else if (val == 1)
                         initList(&list); // On réinitialise la liste si l'utilisateur décide de recréer la liste.
                 }
                 createList(&list, readNumber("\nTaille de la liste : "));
@@ -273,6 +308,13 @@ int main()
                     printf("Impossible de trier la liste ! Liste non initialisé !\n");
                 break;
             case 5:
+                if (listExist(list))
+                {
+                    val = readNumber("\nValeur à supprimer de la liste : ");
+                    printf((deleteCell(&list, val)) ? "\nSuppression effectuée avec succès !" : "\nÉchec de la suppression ! %d ne se trouve pas dans la liste", val);
+                }
+                else
+                    printf("Impossible de trier la liste ! Liste non initialisé !\n");
                 break;
             case 6:
                 break;
