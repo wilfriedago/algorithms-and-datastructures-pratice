@@ -198,8 +198,7 @@ int main()
 
                 break;
             case 1:
-                size = readNumber("\nTaille de la liste : ");
-                createList(&list, size);
+                createList(&list, readNumber("\nTaille de la liste : "));
                 break;
             case 2:
                 addHead(&list, readNumber("\nValeur à ajouter en tête de liste : "));
