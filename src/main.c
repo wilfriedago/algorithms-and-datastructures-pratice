@@ -77,6 +77,24 @@ bool isBetween(int number, int min, int max)
 }
 
 /**
+ * @brief Fonction permettant de vérifier l’existence d'une liste.
+ * @param list Liste passé en paramètre par valeur.
+ */
+bool listExist(Liste list)
+{
+    return list != NULL ? true : false;
+}
+
+/**
+ * @brief Fonction permettant d'initialiser une liste à null.
+ * @param list Liste passé en paramètre par variable.
+ */
+void initList(Liste *list)
+{
+    *list = NULL;
+}
+
+/**
  * @brief Fonction permettant de créer une liste chaînée d'une taille donnée
  * @param list Liste passé en paramètre par variable
  * @param size Taille de la liste
