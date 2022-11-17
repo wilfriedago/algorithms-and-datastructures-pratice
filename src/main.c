@@ -235,23 +235,42 @@ int main()
             switch (choice)
             {
             case 0:
-                if (list != NULL)
+                if (listExist(list))
                     printList(list);
                 else
                     printf("Rien à afficher ! Liste non initialisé !\n");
 
                 break;
             case 1:
+                if (listExist(list))
+                {
+                    printf("Une liste existe déjà !\nCréer une nouvelle liste revient à écraser les valeurs de cette liste existante");
+                    int c = readNumber("\n\nVoulez vous vraiment poursuivre cette opération ? Taper 1 pour Oui, ou 0 pour Non : ");
+
+                    if (c == 0)
+                        break; // On passe l'étape si l'utilisateur choisir de ne pas recréer une nouvelle liste.
+                    else if (c == 1)
+                        initList(&list); // On réinitialise la liste si l'utilisateur décide de recréer la liste.
+                }
                 createList(&list, readNumber("\nTaille de la liste : "));
                 break;
             case 2:
-                addHead(&list, readNumber("\nValeur à ajouter en tête de liste : "));
+                if (listExist(list))
+                    addHead(&list, readNumber("\nValeur à ajouter en tête de liste : "));
+                else
+                    printf("Impossible d'ajouter en tête ! Liste non initialisé !\n");
                 break;
             case 3:
-                addTail(&list, readNumber("\nValeur à ajouter en queue de liste : "));
+                if (listExist(list))
+                    addTail(&list, readNumber("\nValeur à ajouter en queue de liste : "));
+                else
+                    printf("Impossible d'ajouter en queue ! Liste non initialisé !\n");
                 break;
             case 4:
-                sortList(&list);
+                if (listExist(list))
+                    sortList(&list);
+                else
+                    printf("Impossible de trier la liste ! Liste non initialisé !\n");
                 break;
             case 5:
                 break;
