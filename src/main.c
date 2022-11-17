@@ -174,6 +174,32 @@ void addTail(Liste *list, int value)
     }
 }
 
+/**
+ * @brief Procédure permettant de trier une liste
+ * @param list Liste passé en paramètre par variable
+ */
+void sortList(Liste *list)
+{
+    Cellule *P = *list;
+    Cellule *Q = *list;
+
+    while (P != NULL)
+    {
+        Q = P->suiv;
+        while (Q != NULL)
+        {
+            if (P->val > Q->val)
+            {
+                int temp = P->val;
+                P->val = Q->val;
+                Q->val = temp;
+            }
+            Q = Q->suiv;
+        }
+        P = P->suiv;
+    }
+}
+
 int main()
 {
     int choice = 0;
@@ -207,6 +233,7 @@ int main()
                 addTail(&list, readNumber("\nValeur à ajouter en queue de liste : "));
                 break;
             case 4:
+                sortList(&list);
                 break;
             case 5:
                 break;

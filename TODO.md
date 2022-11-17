@@ -4,7 +4,7 @@
 - [x] : Implement createList function to initialize and create a list.
 - [x] : Implement addHead function to add a node at the head of the list.
 - [x] : Implement addTail function to add a node at the tail of the list.
-- [] : Implement sortList function to sort the list.
+- [x] : Implement sortList function to sort the list.
 - [x] : Implement printList function to print the list.
 - [] : Implement deleteList function to delete the list.
 - [] : Implement deleteNode function to delete a node from the list.
