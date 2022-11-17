@@ -1,11 +1,11 @@
 # Lists of all tasks todo
 
 - [x] : Write a program structure.
-- [] : Implement createList function to initialize and create a list.
-- [] : Implement addHead function to add a node at the head of the list.
-- [] : Implement addTail function to add a node at the tail of the list.
+- [x] : Implement createList function to initialize and create a list.
+- [x] : Implement addHead function to add a node at the head of the list.
+- [x] : Implement addTail function to add a node at the tail of the list.
 - [] : Implement sortList function to sort the list.
-- [] : Implement printList function to print the list.
+- [x] : Implement printList function to print the list.
 - [] : Implement deleteList function to delete the list.
 - [] : Implement deleteNode function to delete a node from the list.
 - [] : Implement deleteDuplicate function to delete duplicate nodes from the list.
@@ -13,4 +13,4 @@
 - [] : Implement reverseList function to reverse the list.
 - [] : Implement mergeList function to merge two lists.
 - [] : Implement isPalindrome function to check if the list is palindrome.
-- [] : Implement main function to test the program.
+- [x] : Implement main function to test the program.
