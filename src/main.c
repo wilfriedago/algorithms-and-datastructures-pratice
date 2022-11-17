@@ -199,7 +199,7 @@ void addTail(Liste *list, int value)
 void sortList(Liste *list)
 {
     Cellule *P = *list;
-    Cellule *Q = *list;
+    Cellule *Q;
 
     while (P != NULL)
     {
