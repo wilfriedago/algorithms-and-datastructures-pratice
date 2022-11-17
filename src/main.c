@@ -110,8 +110,9 @@ void createList(Liste *list, int size)
 
 /**
  * @brief Procédure permettant d'afficher une liste
+ * @param list Liste passé en paramètre par valeur
  */
-void displayList(Liste list)
+void printList(Liste list)
 {
     Liste P = list;
 
@@ -119,6 +120,57 @@ void displayList(Liste list)
     {
         printf("%d - ", P->val);
         P = P->suiv;
+    }
+}
+
+/**
+ * @brief Procédure permettant d'ajouter un élément en tête de liste
+ * @param list Liste passé en paramètre par variable
+ * @param value Valeur du nouveau noeud
+ */
+void addHead(Liste *list, int value)
+{
+    Liste P = (Liste)malloc(sizeof(Cellule));
+
+    if (P == NULL)
+        exit(EXIT_FAILURE);
+
+    P->val = value;
+    P->suiv = *list;
+    P->prec = NULL;
+
+    (*list)->prec = P;
+
+    *list = P;
+}
+
+/**
+ * @brief Procédure permettant d'ajouter un élément en queue de liste
+ */
+void addTail(Liste *list, int value)
+{
+    Liste P = (Liste)malloc(sizeof(Cellule));
+
+    if (P == NULL)
+        exit(EXIT_FAILURE); // Échec de l'allocation en mémoire
+
+    P->val = value;
+    P->suiv = NULL;
+    P->prec = NULL;
+
+    if (*list == NULL)
+    {
+        *list = P;
+    }
+    else
+    {
+        Cellule *Q = *list;
+        while (Q->suiv != NULL)
+        {
+            Q = Q->suiv;
+        }
+        Q->suiv = P;
+        P->prec = Q;
     }
 }
 
@@ -140,7 +192,7 @@ int main()
             {
             case 0:
                 if (list != NULL)
-                    displayList(list);
+                    printList(list);
                 else
                     printf("Rien à afficher ! Liste non initialisé !\n");
 
@@ -150,8 +202,10 @@ int main()
                 createList(&list, size);
                 break;
             case 2:
+                addHead(&list, readNumber("\nValeur à ajouter en tête de liste : "));
                 break;
             case 3:
+                addTail(&list, readNumber("\nValeur à ajouter en queue de liste : "));
                 break;
             case 4:
                 break;
