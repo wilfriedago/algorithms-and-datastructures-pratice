@@ -18,7 +18,6 @@ NB :
 
 - La Liste est doublement chaînée.
 - Le menu sera réaffiché jusqu’à ce que l’utilisateur décide de quitter
-- Une opération appliquée sur une liste reste permanente jusqu’à la fin du
-programme.
+- Une opération appliquée sur une liste reste permanente jusqu’à la fin du programme.
 - Une seule liste est la liste courante tout au long du programme et toute opération s’applique à cette liste courante.
 - L’opération de fusion produit une liste triée sans doublon.
