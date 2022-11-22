@@ -1,17 +1,22 @@
 # Lists of all tasks todo
 
 - [x] : Write a program structure.
-- [x] : Implement initList function to initialize a list with NULL.
 - [x] : Implement createList function to initialize and create a list.
-- [x] : Implement addHead function to add a node at the head of the list.
-- [x] : Implement addTail function to add a node at the tail of the list.
+- [x] : Implement insertHead function to insert a cellule at the head of the list.
+- [x] : Implement insertTail function to insert a cellule at the tail of the list.
 - [x] : Implement sortList function to sort the list.
 - [x] : Implement printList function to print the list.
-- [x] : Implement deleteList function to delete the list.
-- [ ] : Implement deleteNode function to delete a node from the list.
-- [ ] : Implement deleteDuplicate function to delete duplicate nodes from the list.
+- [x] : Implement deleteCell function to delete a cellule from the list.
+- [x] : Implement deleteDuplicates function to delete duplicate cellules (Cellules having the same values) from the list.
 - [ ] : Implement searchList function to search a node in the list.
 - [ ] : Implement reverseList function to reverse the list.
 - [ ] : Implement mergeList function to merge two lists.
-- [ ] : Implement isPalindrome function to check if the list is palindrome.
-- [x] : Implement main function to test the program.
+- [ ] : Implement listIsPalindrome function to check if the list is palindrome.
+- [ ] : Implement main function to test the program to the fullest.
+- [x] : Implement a Makefile to compile the program.
+- [x] : Implement a README.md file to explain the program.
+- [x] : Implement a TODO.md file to list all the tasks todo.
+- [x] : Implement a .gitignore file to ignore all the unnecessary files.
+- [x] : Implement a LICENSE file to specify the license of the program.
+- [x] : Implement a .gitattributes file to specify the language of the program.
+- [x] : Implement a .editorconfig file to specify the editor configuration of the program.
