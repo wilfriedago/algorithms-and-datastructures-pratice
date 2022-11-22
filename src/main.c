@@ -220,6 +220,18 @@ int main()
 
                 break;
             case 7:
+                if (maListe != NULL)
+                {
+                    if (deleteLastCell(&maListe))
+                        printf("Suppression de la dernière cellule réussie !\nNouvelle liste : ");
+                    else
+                        printf("Impossible de supprimer la dernière cellule, la liste est vide !\nNouvelle liste : ");
+
+                    printList(maListe);
+                }
+                else
+                    printf("Impossible de supprimer la dernière cellule, la liste n'a pas été créer !\n");
+
                 break;
             case 8:
                 break;
@@ -421,6 +433,32 @@ void deleteDuplicates(Liste *liste)
 
         tempCell = tempCell->suiv;
     }
+}
+
+/**
+ * @brief Fonction permettant de supprimer la dernière cellule d'une liste.
+ * @param liste doublement chaînée passée en paramètre par variable.
+ * @return true : Si la cellule a été supprimer.
+ * @return false : Si la cellule n'a pas pu être supprimer.
+ */
+bool deleteLastCell(Liste *liste)
+{
+    Liste tempCell = *liste;
+
+    if (tempCell == NULL) // Cas d'une liste vide.
+        return false;
+
+    while (tempCell->suiv != NULL) // On parcours la liste jusqu'à la dernière cellule.
+        tempCell = tempCell->suiv;
+
+    if (tempCell->prec == NULL) // Cas où la liste ne contient qu'une seule cellule.
+        *liste = NULL;
+
+    else                             // Cas où la liste contient plusieurs cellules.
+        tempCell->prec->suiv = NULL; // On supprime la dernière cellule.
+
+    free(tempCell);
+    return true;
 }
 
 /**
