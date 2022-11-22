@@ -26,10 +26,9 @@ typedef Cellule *Liste;
 
 /**
  * @brief   Function permettant de créer une liste doublement chaînée d'une seul cellule.
- * @param   valeur Valeur de la première cellule.
- * @return  *newList La liste nouvellement créer.
+ * @param liste Liste doublement chaînée passée en paramètre par variable.
  */
-Liste createList(int valeur);
+void createList(Liste *liste);
 
 /**
  * @brief Procédure permettant d'ajouter une cellule en tête de liste.
@@ -120,7 +119,10 @@ int main()
             {
             case 0:
                 if (maListe != NULL)
+                {
+                    printf("Liste : ");
                     printList(maListe);
+                }
                 else
                     printf("Rien à afficher ! La liste est vide !\n");
 
@@ -141,19 +143,7 @@ int main()
                     }
                 }
 
-                taille = toNumber(readLine("\nTaille de la liste : "));
-
-                if (taille > 0)
-                {
-                    maListe = createList(toNumber(readLine("Valeur de la première cellule : ")));
-                    for (int i = 1; i < taille; i++)
-                        insertTail(&maListe, toNumber(readLine("Valeur de la cellule suivante : ")));
-                }
-                else
-                {
-                    printf("La taille de la liste doit être supérieur à 0 !\n");
-                    break;
-                }
+                createList(&maListe);
 
                 printf("Liste créée avec succès !\nListe : ");
                 printList(maListe);
@@ -236,7 +226,23 @@ int main()
 
                 break;
             case 8:
-                // TODO : Implémenter la fonctionnalité
+                if (maListe != NULL)
+                {
+                    Liste maListe2 = NULL;
+                    createList(&maListe2);
+
+                    printf("Liste 1 : ");
+                    printList(maListe);
+                    printf("Liste 2 : ");
+                    printList(maListe2);
+
+                    mergeLists(&maListe, &maListe2);
+                    printf("Fusion des listes réussie !\nNouvelle liste : ");
+                    printList(maListe);
+                }
+                else
+                    printf("Impossible de fusionner les listes, la liste n'a pas été créer !\n");
+
                 break;
             case 9:
                 if (maListe != NULL)
@@ -278,24 +284,33 @@ int main()
 }
 
 /**
- * @brief   Function permettant de créer une liste doublement chaînée d'une seul cellule.
- * @param   valeur Valeur de la première cellule.
- * @return  *newList La liste nouvellement créer.
+ * @brief Function permettant de créer une liste doublement chaînée d'une seul cellule.
+ * @param liste Liste doublement chaînée passée en paramètre par variable.
+ * @param valeur Valeur de la première cellule.
  */
-Liste createList(int valeur)
+void createList(Liste *liste)
 {
-    Liste newList = (Liste)malloc(sizeof(Cellule));
+    Liste newCell = malloc(sizeof(Cellule));
 
-    if (newList == NULL)
+    if (newCell == NULL)
     {
         printf("Erreur d'allocation mémoire !\n");
         exit(EXIT_FAILURE);
     }
 
-    newList->val = valeur;
-    newList->suiv = NULL;
-    newList->prec = NULL;
-    return newList;
+    int taille = toNumber(readLine("\nTaille de la liste : "));
+
+    newCell->val = toNumber(readLine("Valeur de la première cellule : "));
+    newCell->suiv = NULL;
+    newCell->prec = NULL;
+
+    if (taille > 0)
+    {
+        for (int i = 1; i < taille; i++)
+            insertTail(&newCell, toNumber(readLine("Valeur de la cellule suivante : ")));
+    }
+
+    *liste = newCell;
 }
 
 /**
@@ -305,13 +320,6 @@ Liste createList(int valeur)
  */
 void insertHead(Liste *liste, int valeur)
 {
-    // Cas d'une liste vide.
-    if (*liste == NULL)
-    {
-        (*liste) = createList(valeur);
-        return;
-    }
-
     Liste newCell = (Liste)malloc(sizeof(Cellule));
 
     if (newCell == NULL)
@@ -335,13 +343,6 @@ void insertHead(Liste *liste, int valeur)
  */
 void insertTail(Liste *liste, int valeur)
 {
-    // Cas d'une liste vide.
-    if (*liste == NULL)
-    {
-        (*liste) = createList(valeur);
-        return;
-    }
-
     Liste newCell = (Liste)malloc(sizeof(Cellule));
 
     if (newCell == NULL)
@@ -368,7 +369,7 @@ void insertTail(Liste *liste, int valeur)
  */
 void sortList(Liste *liste)
 {
-    Liste tempCell = *liste;
+    Liste tempCell;
     int tempVal;
     bool isSorted = false;
 
@@ -502,7 +503,8 @@ void mergeLists(Liste *liste1, Liste *liste2)
         tempCell = tempCell->suiv;
     }
 
-    sortList(liste1); // On trie la liste.
+    sortList(liste1);         // On trie la liste.
+    deleteDuplicates(liste1); // On supprime les doublons.
 }
 
 /**
@@ -551,7 +553,7 @@ bool listIsPalindrome(Liste *liste)
             tempCell = tempCell->suiv;
         }
 
-        for (int i = 0; i < size / 2; i++) // On parcours la moitié de la liste.
+        for (int i = 1; i < size / 2; i++) // On parcours la moitié de la liste.
         {
             if (tempCell2->val != tempCell->val) // On vérifie si les valeurs sont identiques.
                 return false;
@@ -570,13 +572,16 @@ bool listIsPalindrome(Liste *liste)
  */
 void printList(Liste liste)
 {
-    printf("%d", liste->val);
-    liste = liste->suiv;
-
-    while (liste != NULL)
+    if (liste != NULL) // Cas d'une liste vide.
     {
-        printf(" - %d", liste->val);
+        printf("%d", liste->val);
         liste = liste->suiv;
+
+        while (liste != NULL)
+        {
+            printf(" - %d", liste->val);
+            liste = liste->suiv;
+        }
+        printf("\n");
     }
-    printf("\n");
 }
