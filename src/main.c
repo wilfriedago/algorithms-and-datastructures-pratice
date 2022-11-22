@@ -209,6 +209,15 @@ int main()
 
                 break;
             case 6:
+                if (maListe != NULL)
+                {
+                    deleteDuplicates(&maListe);
+                    printf("Suppression des doublons réussie !\nNouvelle liste : ");
+                    printList(maListe);
+                }
+                else
+                    printf("Impossible de supprimer les doublons, la liste n'a pas été créer !\n");
+
                 break;
             case 7:
                 break;
