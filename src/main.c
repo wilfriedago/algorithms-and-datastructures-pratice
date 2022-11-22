@@ -437,8 +437,6 @@ bool deleteCell(Liste *liste, int valeur)
  * @brief Procédure permettant de supprimer les doublons d'une liste
  * @param liste Liste passé en paramètre par variable
  */
-// TODO : Revoir la logique, la fonction ne fonctionne pas.
-//! Seul le premier doublon est supprimé.
 void deleteDuplicates(Liste *liste)
 {
     Liste tempCell = *liste;
@@ -503,6 +501,8 @@ void mergeLists(Liste *liste1, Liste *liste2)
         insertTail(liste1, tempCell->val); // On insère les cellules de la deuxième liste dans la première.
         tempCell = tempCell->suiv;
     }
+
+    sortList(liste1); // On trie la liste.
 }
 
 /**
