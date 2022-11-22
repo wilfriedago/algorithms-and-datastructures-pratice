@@ -158,15 +158,54 @@ int main()
                 printf("Liste créée avec succès !\n");
                 break;
             case 2:
+                if (maListe != NULL)
+                {
+                    val = toNumber(readLine("\nValeur de la cellule à insérer : "));
+                    insertHead(&maListe, val);
+                    printf("Insertion en tête réussie !\nNouvelle liste : ");
+                    printList(maListe);
+                }
+                else
+                    printf("Impossible d'insérer un élément en tête, la liste n'a pas été créer !\n");
 
                 break;
             case 3:
+                if (maListe != NULL)
+                {
+                    val = toNumber(readLine("\nValeur de la cellule à insérer : "));
+                    insertTail(&maListe, val);
+                    printf("Insertion en queue réussie !\nNouvelle liste : ");
+                    printList(maListe);
+                }
+                else
+                    printf("Impossible d'insérer un élément en queue, la liste n'a pas été créer !\n");
 
                 break;
             case 4:
+                if (maListe != NULL)
+                {
+                    sortList(&maListe);
+                    printf("Tri réussi !\nNouvelle liste : ");
+                    printList(maListe);
+                }
+                else
+                    printf("Impossible d'effectuer le trie, la liste n'a pas été créer !\n");
 
                 break;
             case 5:
+                if (maListe != NULL)
+                {
+                    val = toNumber(readLine("Valeur de la cellule à supprimer : "));
+
+                    if (deleteCell(&maListe, val))
+                        printf("Suppression réussie !\nNouvelle liste : ");
+                    else
+                        printf("Impossible de supprimer la cellule, elle n'existe pas !\nNouvelle liste : ");
+
+                    printList(maListe);
+                }
+                else
+                    printf("Impossible de supprimer une cellule, la liste n'a pas été créer !\n");
 
                 break;
             case 6:
