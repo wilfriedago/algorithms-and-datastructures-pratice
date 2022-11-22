@@ -435,7 +435,6 @@ bool deleteCell(Liste *liste, int valeur)
  * @brief Procédure permettant de supprimer les doublons d'une liste
  * @param liste Liste passé en paramètre par variable
  */
-// TODO : Revoir la logique.
 void deleteDuplicates(Liste *liste)
 {
     Liste tempCell = *liste;
