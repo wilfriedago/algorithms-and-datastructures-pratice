@@ -155,7 +155,9 @@ int main()
                     break;
                 }
 
-                printf("Liste créée avec succès !\n");
+                printf("Liste créée avec succès !\nListe : ");
+                printList(maListe);
+
                 break;
             case 2:
                 if (maListe != NULL)
