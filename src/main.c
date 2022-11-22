@@ -435,7 +435,8 @@ bool deleteCell(Liste *liste, int valeur)
  * @brief Procédure permettant de supprimer les doublons d'une liste
  * @param liste Liste passé en paramètre par variable
  */
-// TODO : Revoir la logique.
+// TODO : Revoir la logique, la fonction ne fonctionne pas.
+//! Seul le premier doublon est supprimé.
 void deleteDuplicates(Liste *liste)
 {
     Liste tempCell = *liste;
@@ -527,6 +528,9 @@ void reverseList(Liste *liste)
  * @brief Fonction permettant de vérifier si une liste est un palindrome.
  * @param liste Liste doublement chaînée passée en paramètre par variable.
  */
+// TODO : Revoir la logique, la fonction ne fonctionne pas.
+//! La fonction ne fonctionne pas, elle renvoie toujours true.
+//! Error : Segmentation fault.
 bool listIsPalindrome(Liste *liste)
 {
     if (*liste == NULL) // Cas d'une liste vide.
