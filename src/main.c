@@ -234,10 +234,29 @@ int main()
 
                 break;
             case 8:
+                // TODO : Implémenter la fonctionnalité
                 break;
             case 9:
+                if (maListe != NULL)
+                {
+                    reverseList(&maListe);
+                    printf("Renversement de la liste réussi !\nNouvelle liste : ");
+                    printList(maListe);
+                }
+                else
+                    printf("Impossible de renverser la liste, la liste n'a pas été créer !\n");
+
                 break;
             case 10:
+                if (maListe != NULL)
+                {
+                    if (listIsPalindrome(&maListe))
+                        printf("La liste est un palindrome !\n");
+                    else
+                        printf("La liste n'est pas un palindrome !\n");
+                }
+                else
+                    printf("Impossible de vérifier si la liste est un palindrome, la liste n'a pas été créer !\n");
                 break;
             case 11:
                 printf("Le programme va s'arrêter !\n");
@@ -474,6 +493,62 @@ void mergeLists(Liste *liste1, Liste *liste2)
     {
         insertTail(liste1, tempCell->val); // On insère les cellules de la deuxième liste dans la première.
         tempCell = tempCell->suiv;
+    }
+}
+
+/**
+ * @brief Procédure permettant de renverser une liste doublement chaînée.
+ * @param liste Liste chaînée passée en paramètre par variable.
+ */
+void reverseList(Liste *liste)
+{
+    Liste tempCell = *liste;
+    Liste tempCell2 = NULL;
+
+    while (tempCell != NULL)
+    {
+        tempCell2 = tempCell->prec;      // On stocke la cellule précédente.
+        tempCell->prec = tempCell->suiv; // On inverse les pointeurs.
+        tempCell->suiv = tempCell2;      // On inverse les pointeurs.
+        tempCell = tempCell->prec;       // On avance dans la liste.
+    }
+
+    if (tempCell2 != NULL)        // On vérifie que la liste n'est pas vide.
+        *liste = tempCell2->prec; // On affecte la nouvelle tête de liste.
+}
+
+/**
+ * @brief Fonction permettant de vérifier si une liste est un palindrome.
+ * @param liste Liste doublement chaînée passée en paramètre par variable.
+ */
+bool listIsPalindrome(Liste *liste)
+{
+    if (*liste == NULL) // Cas d'une liste vide.
+        return false;
+    else if ((*liste)->suiv == NULL) // Cas d'une liste contenant une seule cellule.
+        return true;
+    else
+    {
+        Liste tempCell = *liste;
+        Liste tempCell2 = *liste;
+        int size = 0;
+
+        while (tempCell != NULL) // On parcours la liste pour compter le nombre de cellules.
+        {
+            size++;
+            tempCell = tempCell->suiv;
+        }
+
+        for (int i = 0; i < size / 2; i++) // On parcours la moitié de la liste.
+        {
+            if (tempCell2->val != tempCell->val) // On vérifie si les valeurs sont identiques.
+                return false;
+
+            tempCell2 = tempCell2->suiv; // On avance dans la première moitié de la liste.
+            tempCell = tempCell->prec;   // On recule dans la deuxième moitié de la liste.
+        }
+
+        return true;
     }
 }
 
