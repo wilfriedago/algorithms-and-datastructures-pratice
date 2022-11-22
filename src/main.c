@@ -462,6 +462,22 @@ bool deleteLastCell(Liste *liste)
 }
 
 /**
+ * @brief Procédure permettant de fusionner deux listes doublement chaînée.
+ * @param liste1 Première liste à fusionner.
+ * @param liste2 Deuxième liste à fusionner.
+ */
+void mergeLists(Liste *liste1, Liste *liste2)
+{
+    Liste tempCell = *liste2;
+
+    while (tempCell != NULL)
+    {
+        insertTail(liste1, tempCell->val); // On insère les cellules de la deuxième liste dans la première.
+        tempCell = tempCell->suiv;
+    }
+}
+
+/**
  * @brief Procédure permettant d'afficher une liste.
  * @param liste Liste doublement chaînée passé en paramètre par valeur.
  */
