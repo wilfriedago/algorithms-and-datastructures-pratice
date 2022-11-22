@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <wchar.h>
+#include "../libs/utilitaires.h" // Appel des fonctions de la bibliothèque utilitaires.h (clearConsole, pauseConsole, displayMenu, readLine, isNumber, toNumber)
 
 typedef struct Cellule Cellule; // Déclaration de la structure Cellule
 
@@ -19,10 +20,6 @@ typedef Cellule *Liste; // Définition de la structure de la liste
  * @brief Procédure permettant de nettoyer le contenu de la console
  */
 void clearConsole()
-{
-#ifdef _WIN32
-    system("cls");
-#endif
 
 #ifdef __unix__
     system("clear");
@@ -33,10 +30,6 @@ void clearConsole()
  * @brief Procédure permettant de faire une pause la console
  */
 void pauseConsole()
-{
-#ifdef _WIN32
-    system("pause");
-#endif
 
 #ifdef __unix__
     system("sleep 2");
@@ -47,23 +40,12 @@ void pauseConsole()
  * @brief Procédure permettant d'afficher le menu du jeu
  */
 void displayMenu()
-{
-    clearConsole();
-    printf("**********************************\n*        MENU DU PROGRAMME       *\n**********************************\n\n 0. Afficher la liste\n 1. Créer une liste chaînée d'entier\n 2. Ajouter un élément en tête de liste\n 3. Ajouter un élément en queue de liste\n 4. Tier la liste\n 5. Supprimer un élément de la liste\n 6. Supprimer les doublons de la liste\n 7. Supprimer le dernier élément de la liste\n 8. Fusionner deux listes\n 9. Inverser la liste\n10. Vérifier si une liste est un palindrome\n11. Quitter le programme\n");
-}
 
 /**
  * @brief Fonction permettant de lire une caractère saisie à la console
  * @param message Message à afficher dans la console
- * @return int
  */
 int readNumber(char *message)
-{
-    int choice;
-    printf("%s", message);
-    scanf("%d", &choice);
-    return choice;
-}
 
 /**
  * Fonction permettant de vérifier si un nombre est compris dans un intervalle
@@ -72,18 +54,12 @@ int readNumber(char *message)
  * @param max Valeur maximale
  */
 bool isBetween(int number, int min, int max)
-{
-    return (number >= min && number <= max) ? true : false;
-}
 
 /**
  * @brief Fonction permettant de vérifier l’existence d'une liste.
  * @param list Liste passé en paramètre par valeur.
  */
 bool listExist(Liste list)
-{
-    return list != NULL ? true : false;
-}
 
 /**
  * @brief Fonction permettant d'initialiser une liste à null.
