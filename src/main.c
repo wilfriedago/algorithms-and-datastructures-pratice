@@ -368,21 +368,27 @@ void sortList(Liste *liste)
 {
     Liste tempCell = *liste;
     int tempVal;
+    bool isSorted = false;
 
-    while (tempCell != NULL)
+    do
     {
-        if (tempCell->suiv != NULL)
+        isSorted = true; // On suppose que la liste est triée.
+        tempCell = *liste;
+
+        while (tempCell->suiv != NULL)
         {
             if (tempCell->val > tempCell->suiv->val)
             {
                 tempVal = tempCell->val;
                 tempCell->val = tempCell->suiv->val;
                 tempCell->suiv->val = tempVal;
+                isSorted = false; // La liste n'est pas triée.
             }
+
+            tempCell = tempCell->suiv;
         }
 
-        tempCell = tempCell->suiv;
-    }
+    } while (!isSorted); // Tant que la liste n'est pas triée.
 }
 
 /**
