@@ -128,7 +128,7 @@ int main()
             case 1:
                 if (maListe != NULL)
                 {
-                    printf("Une liste existe déjà !\nCréer une nouvelle liste revient à écraser la liste existante");
+                    printf("Une liste existe déjà !\nCréer une nouvelle liste revient à écraser la liste existante.");
                     if (readLine("\nVoulez-vous continuer ? (O/N) : ")[0] == 'O')
                     {
                         free(maListe);
