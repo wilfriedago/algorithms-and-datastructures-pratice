@@ -420,9 +420,13 @@ void deleteDuplicates(Liste *liste)
  */
 void printList(Liste liste)
 {
+    printf("%d", liste->val);
+    liste = liste->suiv;
+
     while (liste != NULL)
     {
-        printf("%d\t", liste->val);
-        printList(liste->suiv);
+        printf(" - %d", liste->val);
+        liste = liste->suiv;
     }
+    printf("\n");
 }
