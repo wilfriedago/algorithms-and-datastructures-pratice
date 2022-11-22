@@ -501,6 +501,8 @@ void mergeLists(Liste *liste1, Liste *liste2)
         insertTail(liste1, tempCell->val); // On insère les cellules de la deuxième liste dans la première.
         tempCell = tempCell->suiv;
     }
+
+    sortList(liste1); // On trie la liste.
 }
 
 /**
