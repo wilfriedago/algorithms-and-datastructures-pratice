@@ -1,20 +1,28 @@
+/**
+ * @file main.c
+ * @brief Implémentation d'une Liste doublement chaînée.
+ *
+ * @author [Wilfried Kirin AGO](https://github.com/wilfriedago)
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <string.h>
 #include <wchar.h>
 #include "../libs/utilitaires.h" // Appel des fonctions de la bibliothèque utilitaires.h (clearConsole, pauseConsole, displayMenu, readLine, isNumber, toNumber)
 
-typedef struct Cellule Cellule; // Déclaration de la structure Cellule
-
-struct Cellule
+/**
+ * @brief Structure d'une cellule de la liste.
+ */
+typedef struct Cellule
 {
-    int val;
-    Cellule *suiv;
-    Cellule *prec;
-}; // Définition de la structure Cellule
+    int val;                     // Valeur de la cellule.
+    struct Cellule *suiv, *prec; // Pointeurs vers les autres cellules, ou NULL.
+} Cellule;
 
-typedef Cellule *Liste; // Définition de la structure de la liste
+/**
+ * @brief Structure d'une liste doublement chaînée.
+ */
+typedef Cellule *Liste;
 
 /**
  * @brief Procédure permettant de nettoyer le contenu de la console
