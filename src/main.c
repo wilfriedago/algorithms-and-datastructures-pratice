@@ -155,7 +155,9 @@ int main()
                     break;
                 }
 
-                printf("Liste créée avec succès !\n");
+                printf("Liste créée avec succès !\nListe : ");
+                printList(maListe);
+
                 break;
             case 2:
                 if (maListe != NULL)
@@ -526,6 +528,9 @@ void reverseList(Liste *liste)
  * @brief Fonction permettant de vérifier si une liste est un palindrome.
  * @param liste Liste doublement chaînée passée en paramètre par variable.
  */
+// TODO : Revoir la logique, la fonction ne fonctionne pas.
+//! La fonction ne fonctionne pas, elle renvoie toujours true.
+//! Error : Segmentation fault.
 bool listIsPalindrome(Liste *liste)
 {
     if (*liste == NULL) // Cas d'une liste vide.
