@@ -286,7 +286,6 @@ int main()
 /**
  * @brief Function permettant de créer une liste doublement chaînée d'une seul cellule.
  * @param liste Liste doublement chaînée passée en paramètre par variable.
- * @param valeur Valeur de la première cellule.
  */
 void createList(Liste *liste)
 {
@@ -410,10 +409,7 @@ bool deleteCell(Liste *liste, int valeur)
         if (tempCell->val == valeur)
         {
             if (tempCell->prec == NULL) // Cas où la cellule à supprimer est en tête de liste.
-            {
-                *liste = tempCell->suiv;
-                (*liste)->prec = NULL;
-            }
+                tempCell = tempCell->suiv;
 
             else if (tempCell->suiv == NULL) // Cas où la cellule à supprimer est en queue de liste.
                 tempCell->prec->suiv = NULL;
@@ -440,25 +436,24 @@ bool deleteCell(Liste *liste, int valeur)
  */
 void deleteDuplicates(Liste *liste)
 {
-    Liste tempCell = *liste;
+    Liste actualCell = *liste;
+    Liste nextCell;
 
-    while (tempCell != NULL)
+    if (actualCell == NULL)
+        return;
+
+    sortList(&actualCell);
+
+    while (actualCell->suiv != NULL)
     {
-        if (tempCell->suiv != NULL)
+        if (actualCell->val == actualCell->suiv->val)
         {
-            if (tempCell->val == tempCell->suiv->val)
-            {
-                if (tempCell->suiv->suiv != NULL)
-                {
-                    tempCell->suiv = tempCell->suiv->suiv;
-                    tempCell->suiv->prec = tempCell;
-                }
-                else
-                    tempCell->suiv = NULL;
-            }
+            nextCell = actualCell->suiv->suiv;
+            free(actualCell->suiv);
+            actualCell->suiv = nextCell;
         }
-
-        tempCell = tempCell->suiv;
+        else
+            actualCell = actualCell->suiv;
     }
 }
 
@@ -503,7 +498,6 @@ void mergeLists(Liste *liste1, Liste *liste2)
         tempCell = tempCell->suiv;
     }
 
-    sortList(liste1);         // On trie la liste.
     deleteDuplicates(liste1); // On supprime les doublons.
 }
 
